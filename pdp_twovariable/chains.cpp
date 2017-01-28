@@ -9,11 +9,15 @@ void chains(int a,int b,int c,int l1,int u1,int &t1,int &t2,int &x,int &y,bool &
 {
         int x0 = 0;
         int y0 = 0;
+        ifposs = true;
         solution(a,b,c,x0,y0);
         x = x0;y = y0;
+        if(x == 0 & y == 0 & c!= 0)
+        {
+            ifposs = false;
+        }
         float t1_x,t2_x;
         float t1_y,t2_y;
-        ifposs = true;
         if(b>0)
         {
             t1_x = ceil(float(x-u1)/float(b));

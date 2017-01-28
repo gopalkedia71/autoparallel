@@ -34,14 +34,14 @@ int main()
         }
         else if(a[i]<0 && b[i]<0)
         {
-            low[i] = a[i]*u[i] + b[i]*l[i];
-            upp[i] = a[i]*l[i] + b[i]*u[i];
+            low[i] = a[i]*u[i] + b[i]*u[i];
+            upp[i] = a[i]*l[i] + b[i]*l[i];
         
         }
         else
         {
-            low[i] = a[i]*u[i] + b[i]*u[i];
-            upp[i] = a[i]*l[i] + b[i]*l[i];
+            low[i] = a[i]*u[i] + b[i]*l[i];
+            upp[i] = a[i]*l[i] + b[i]*u[i];
         }
     }
     int c_low,c_upp;
@@ -63,16 +63,13 @@ int main()
                 ifposs[i]=true;
                 tl[i]=0;tu[i]=0;
                 x[i]=0;y[i]=0;
+                tdiff[i] = 0;
                 if(ifsol(a[i],b[i],c[i]))
                 {
                     chains(a[i],b[i],c[i],l[i],u[i],tl[i],tu[i],x[i],y[i],ifposs[i]);
                     if(ifposs[i])
                     {
                         tdiff[i]=tu[i]-tl[i]+1;
-                    }
-                    else
-                    {
-                        tdiff[i] = 0;
                     }
                 }
             }
@@ -150,7 +147,29 @@ int main()
             }
         }
     }
-
+    for(int i = 0; i<lpairs.size(); i++)
+    {
+        bool if_i_present = true;
+        for(int k = 0; k<index.size(); k++)
+        {
+            for(int l = 0; l<index[k].size(); l++)
+            {
+                if(index[k][l] == i)
+                {
+                    if_i_present = false;
+                }
+            }
+        }
+        if(if_i_present)
+        {
+            tmp.clear();
+            tmp.push_back(i);
+            index.push_back(tmp);
+        }
+        
+    }
+     
+    cout<<index.size()<<"\n";
     for(int i = 0; i<index.size() ; i++)
     {
         for(int j = 0; j<index[i].size(); j++)
